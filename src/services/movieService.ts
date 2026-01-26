@@ -8,9 +8,9 @@ interface FetchMoviesResponse {
     total_results: number;
 }
 
-export default function fetchMovies(query: string):Promise<Movie[]> {
+export default function fetchMovies(query: string, page: number = 1):Promise<FetchMoviesResponse> {
     const myKey = import.meta.env.VITE_TMDB_TOKEN;
-    const url = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
+    const url = 'https://api.themoviedb.org/3/search/movie';
     
     return axios.get<FetchMoviesResponse>(url, {
       headers: {
@@ -19,6 +19,7 @@ export default function fetchMovies(query: string):Promise<Movie[]> {
       },
       params: {
         query,
+        page,
       }
-    }).then ((response) => response.data.results);
+    }).then ((response) => response.data);
 }
