@@ -1,5 +1,10 @@
-import css from "./Loader.module.css";
-
 export default function Loader() {
-  return <p className={css.text}>Loading movies, please wait...</p>;
+  return <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+  {Array.from({ length: 12 }).map((_, i) => (
+    <div
+      key={i}
+      className="animate-pulse bg-gray-800 h-64 rounded-lg"
+    />
+  ))}
+</div>
 }
